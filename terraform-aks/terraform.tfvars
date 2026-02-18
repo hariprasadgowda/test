@@ -18,4 +18,4 @@ cluster_name       = "my-aks-cluster"
 dns_prefix         = "myaks"
 kubernetes_version = "1.30.101"
 node_count         = 2
-vm_size            = "Standard_DS2_v2"
+vm_size            = "standard_dc2as_v5"
