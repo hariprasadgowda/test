@@ -33,7 +33,7 @@ provider "kubernetes" {
 }
 
 # Apps Namespace
-resource "kubernetes_namespace" "apps" {
+resource "kubernetes_namespace_v1" "apps" {
   provider = kubernetes.aks
 
   metadata {

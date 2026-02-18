@@ -45,5 +45,5 @@ output "node_resource_group" {
 
 output "apps_namespace" {
   description = "Name of the apps namespace"
-  value       = kubernetes_namespace.apps.metadata[0].name
+  value       = kubernetes_namespace_v1.apps.metadata[0].name
 }
