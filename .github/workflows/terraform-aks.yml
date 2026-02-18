@@ -24,8 +24,6 @@ jobs:
       run:
         working-directory: terraform-aks
 
-    environment: ${{ github.event.inputs.environment || 'dev' }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
