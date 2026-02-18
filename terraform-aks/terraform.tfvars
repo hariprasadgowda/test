@@ -9,9 +9,9 @@ tags = {
 
 # Network Settings
 vnet_name          = "aks-vnet"
-vnet_address_space = ["10.0.0.0/16"]
+vnet_address_space = ["10.10.0.0/16"]
 subnet_name        = "aks-subnet"
-subnet_prefixes    = ["10.0.1.0/24"]
+subnet_prefixes    = ["10.10.1.0/24"]
 
 # AKS Settings
 cluster_name       = "my-aks-cluster"
