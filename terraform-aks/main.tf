@@ -28,7 +28,7 @@ module "aks" {
   location            = module.resource_group.location
   cluster_name        = var.cluster_name
   dns_prefix          = var.dns_prefix
-  kubernetes_version  = var.kubernetes_version
+  kubernetes_version  = null
   subnet_id           = module.network.subnet_id
   node_count          = var.node_count
   vm_size             = var.vm_size
