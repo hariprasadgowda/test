@@ -1,0 +1,50 @@
+name: Deploy Kubernetes Manifests
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 🔐 Azure login via OIDC
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      # 🎯 Get AKS Credentials
+      - name: Get AKS Credentials
+        run: |
+          az aks get-credentials \
+            --resource-group aks-rg \
+            --name my-aks-cluster \
+            --overwrite-existing
+
+      # 🔍 Verify cluster connection
+      - name: Verify Cluster
+        run: kubectl get nodes
+
+      # 🚀 Deploy manifests
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f Hello-World/k8s-manifest.yaml
