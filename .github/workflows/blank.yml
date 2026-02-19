@@ -15,7 +15,9 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: Hello-World
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,10 +30,10 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
       - name: Login to ACR
-        run: az acr login --name ${{ secrets.ACR_NAME }}
+        run: az acr login --name acrtesthariuse
 
       - name: Build and Push
         run: |
-          IMAGE=${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          IMAGE=acrtesthariuse.azurecr.io/hello-world:latest
           docker build -t $IMAGE .
           docker push $IMAGE
